@@ -22,26 +22,33 @@ def page_index():
 def page_candidat(id):
     candidates_list = ""
     candidat = functions.candidates_id(id)
-    _candidat_img = candidat['picture']
-    candidates_list += f"Имя кандидата - {candidat['name']} \n"
-    candidates_list += f"Позиция кандидата {candidat['position']} \n"
-    candidates_list += f"Навыки через запятую {candidat['skills']} \n"
-    candidates_list += f"\n"
 
-    return "<img src=" + _candidat_img + ">" + "<pre>" + candidates_list + "</pre>"
+    if candidat == None:
+        return "<pre>" + "Кандидат не найден" + "</pre>"
+    else:
+        _candidat_img = candidat['picture']
+        candidates_list += f"Имя кандидата - {candidat['name']} \n"
+        candidates_list += f"Позиция кандидата {candidat['position']} \n"
+        candidates_list += f"Навыки через запятую {candidat['skills']} \n"
+        candidates_list += f"\n"
+        return "<img src=" + _candidat_img + ">" + "<pre>" + candidates_list + "</pre>"
+
 
 
 @app.route("/skills/<skill>")
 def page_skills(skill):
     _candidates_list = ""
     _candidats = functions.candidates_skills(skill)
-    for _candidat in _candidats:
-        _candidates_list += f"Имя кандидата - {_candidat['name']} \n"
-        _candidates_list += f"Позиция кандидата {_candidat['position']} \n"
-        _candidates_list += f"Навыки через запятую {_candidat['skills']} \n"
-        _candidates_list += f"\n"
 
-    return "<pre>" + _candidates_list + "</pre>"
+    if len(_candidats) == 0:
+        return "<pre>" + "Кандидат не найден" + "</pre>"
+    else:
+        for _candidat in _candidats:
+            _candidates_list += f"Имя кандидата - {_candidat['name']} \n"
+            _candidates_list += f"Позиция кандидата {_candidat['position']} \n"
+            _candidates_list += f"Навыки через запятую {_candidat['skills']} \n"
+            _candidates_list += f"\n"
+            return "<pre>" + _candidates_list + "</pre>"
 
 
 app.run(host='0.0.0.0', port=8000)

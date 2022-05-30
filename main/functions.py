@@ -9,23 +9,28 @@ def load_data(path=DATA):
 
 def all_candidates():
 
-    'Загружает список кандидатов'
+    '''Загружает список кандидатов'''
 
     candidates = load_data()
     return candidates
 
 
 def candidates_id(id):
-    'Загружает список кандидатов по номеру id'
+
+    '''Загружает список кандидатов по номеру id'''
+
     candidates = load_data()
-    candidates_list = ""
+
     for candidat in candidates:
         if id == candidat["id"]:
             return candidat
 
 
+
 def candidates_skills(skill):
-    'Загружает список кандидатов по навыкам'
+
+    '''Загружает список кандидатов по навыкам'''
+
     skill = skill.lower()
     candidates = load_data()
     candidates_list = []
@@ -40,6 +45,9 @@ def candidates_skills(skill):
                 candidates_list.append(candidat)
 
     return candidates_list
+
+
+
 
 
 
